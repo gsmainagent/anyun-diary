@@ -1,0 +1,16 @@
+# 单独容器的 frpc —— 复用全局凭据（FRP_TOKEN），不触碰系统 frpc 服务
+serverAddr = "cloud.bcw2.top"
+serverPort = 3007
+
+auth.method = "token"
+auth.token = "{{ .Envs.FRP_TOKEN }}"
+
+log.to = "console"
+log.level = "info"
+
+[[proxies]]
+name = "anyun-diary"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 4173
+customDomains = ["anyun-diary.public.bcw2.top"]
