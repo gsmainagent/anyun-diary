@@ -3,6 +3,8 @@
 # 那台 frps 不是 nginx:3004 前置的这台，注册成功也不路由（曾导致整站 404）。
 serverAddr = "192.168.1.51"
 serverPort = 3007
+# 该机器同时是内网 DNS（cloud.bcw2.top 的内网解析就在这）；若改回域名形式，靠这条也能解析对
+dnsServer = "192.168.1.51"
 
 auth.method = "token"
 auth.token = "{{ .Envs.FRP_TOKEN }}"
