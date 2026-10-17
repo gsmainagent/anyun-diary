@@ -14,3 +14,11 @@ type = "http"
 localIP = "127.0.0.1"
 localPort = 4173
 customDomains = ["anyun-diary.public.bcw2.top"]
+
+# 开发实例（vite dev :5173）——与生产隔离
+[[proxies]]
+name = "anyun-diary-dev"
+type = "http"
+localIP = "127.0.0.1"
+localPort = 5173
+customDomains = ["anyun-diary-dev.public.bcw2.top"]
