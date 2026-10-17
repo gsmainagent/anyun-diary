@@ -1,5 +1,7 @@
 # 单独容器的 frpc —— 复用全局凭据（FRP_TOKEN），不触碰系统 frpc 服务
-serverAddr = "cloud.bcw2.top"
+# 注意：钉 LAN IP。cloud.bcw2.top 在容器内会解析到公网路径（115.195.46.106），
+# 那台 frps 不是 nginx:3004 前置的这台，注册成功也不路由（曾导致整站 404）。
+serverAddr = "192.168.1.51"
 serverPort = 3007
 
 auth.method = "token"
