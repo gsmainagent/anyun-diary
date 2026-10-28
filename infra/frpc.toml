@@ -1,7 +1,7 @@
 # 单独容器的 frpc —— 复用全局凭据（FRP_TOKEN），不触碰系统 frpc 服务
-# ⚠ 弃用（2026-10-28）：生产经 MCSM 实例承载，本隧道（含 anyun-diary/anyun-diary-dev 两个
-# proxy）已停：容器 anyun-frpc 已置 restart=no 并停止（podman-restart.service 不再复活它），
-# systemd user anyun-diary-frpc.service 已 disable --now。保留本文件作可回溯配置。
+# 口径修正（2026-10-28 owner：弃的是生产不是 frp）：dev 隧道继续用。生产 proxy（anyun-diary
+# →:4173）已从本文件摘除：生产改由 MCSM 实例承载。容器 anyun-frpc 保持 stop+restart=no
+#（它曾抢注 proxy 名且 dev 上游在容器内不通）；systemd user anyun-diary-frpc.service 承载 dev。
 # 注意：钉 LAN IP。cloud.bcw2.top 在容器内会解析到公网路径（115.195.46.106），
 # 那台 frps 不是 nginx:3004 前置的这台，注册成功也不路由（曾导致整站 404）。
 serverAddr = "192.168.1.51"
@@ -15,14 +15,7 @@ auth.token = "{{ .Envs.FRP_TOKEN }}"
 log.to = "console"
 log.level = "info"
 
-[[proxies]]
-name = "anyun-diary"
-type = "http"
-localIP = "127.0.0.1"
-localPort = 4173
-customDomains = ["anyun-diary.public.bcw2.top"]
-
-# 开发实例（vite dev :5173）——与生产隔离
+# 开发实例（vite dev :5173）——与生产隔离（生产 proxy 已摘，见顶部注记）
 [[proxies]]
 name = "anyun-diary-dev"
 type = "http"
